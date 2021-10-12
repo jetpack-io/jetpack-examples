@@ -1,4 +1,4 @@
-jetpack-io>=0.5.1-dev20210921
+jetpack-io>=0.5.1.dev20211010
 flask
 fastapi
 flask[async]
