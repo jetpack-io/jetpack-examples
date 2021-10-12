@@ -15,8 +15,8 @@ from jetpack import job
 
 @job
 async def flip_coin(label: str) -> str:
-    result = "heads" if random.randint(0, 1) == 0 else "tails"
+    flip = "heads" if random.randint(0, 1) == 0 else "tails"
     time.sleep(1)
-    print(f'For Job {label}: {result}')
+    print(f'For Job {label}: {flip}')
     time.sleep(1)
-    return result
+    return flip

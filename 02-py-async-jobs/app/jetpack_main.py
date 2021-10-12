@@ -1,16 +1,21 @@
 import asyncio
-import boto3
-from typing import Dict, List
-from coin_toss import flip_coin
-from fibonacci import fibonacci
-from error_job import error_thrower
+import time
+import random
+from typing import Dict, List, Tuple
+from jetpack import job
+# from coin_toss import flip_coin
+# from fibonacci import fibonacci
+# from error_job import error_thrower
 from fastapi import FastAPI, Response
 from fastapi.responses import HTMLResponse
 
 
 app = FastAPI()
 
-# Bump the cache
+class TestError(Exception):
+    def __init__(self, message):
+        self.message = message
+
 
 @app.get("/")
 async def ready() -> Response:
@@ -45,19 +50,34 @@ async def fib(n: int) -> int:
     return result
 
 
-@app.get("/readyz")
-def readyz() -> Response:
-    return Response(status_code=200)
-
-
-@app.get("/s3_download")
-async def s3_download() -> HTMLResponse:
-    s3 = boto3.resource('s3')
-    s3.Bucket("lago-test-bucket").download_file("lago-test.html", "/tmp/lago-test.html")
-    html_content = open("/tmp/lago-test.html").read()
-    return HTMLResponse(content=html_content, status_code=200)
-
-
 @app.get("/error")
 def error():
     error_thrower()
+
+
+@job
+async def flip_coin(label: str) -> str:
+    flip = "heads" if random.randint(0, 1) == 0 else "tails"
+    time.sleep(1)
+    print(f'For Job {label}: {flip}')
+    time.sleep(1)
+    return flip
+
+@job
+async def fibonacci(n: int) -> int:
+    if n < 0:
+        print("Incorrect input")
+        raise ValueError
+    # First Fibonacci number is 0
+    elif n == 0:
+        return 0
+    # Second Fibonacci number is 1
+    elif n == 1:
+        return 1
+    else:
+        r: Tuple[int, int] = await asyncio.gather(fibonacci(n - 1), fibonacci(n - 2))
+        return r[0] + r[1]
+
+@job
+def error_thrower():
+    raise TestError("This is a passed error")
