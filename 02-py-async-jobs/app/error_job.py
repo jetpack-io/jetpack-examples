@@ -1,6 +1,4 @@
 from jetpack import job
-import sys
-
 
 class TestError(Exception):
     def __init__(self, message):

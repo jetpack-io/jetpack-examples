@@ -7,6 +7,7 @@ from starlette.responses import HTMLResponse, Response
 
 app = FastAPI()
 
+
 @app.get("/")
 def ready() -> Response:
     return Response(status_code=200)
@@ -44,7 +45,7 @@ async def s3_access_job() -> str:
     # Read a file from the Jetpack Account
     bucketA.download_file("lago-test.html", "/tmp/lago-test.html")
     # Write a file to the Personal Account
-    bucketB.put_object(Key="last_visit.txt", Body=open("last_visit.txt", "rb")) 
+    bucketB.put_object(Key="last_visit.txt", Body=open("last_visit.txt", "rb"))
     html_content = open("/tmp/lago-test.html").read()
     return html_content
 

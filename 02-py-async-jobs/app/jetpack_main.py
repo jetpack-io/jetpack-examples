@@ -1,13 +1,10 @@
 import asyncio
-import time
-import random
-from typing import Dict, List, Tuple
+from typing import Dict, List 
 from jetpack import cli
 from coin_toss import flip_coin
 from fibonacci import fibonacci
 from error_job import error_thrower
 from fastapi import FastAPI, Response
-from fastapi.responses import HTMLResponse
 
 
 app = FastAPI()
