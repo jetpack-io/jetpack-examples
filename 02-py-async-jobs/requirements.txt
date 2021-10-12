@@ -1,0 +1,6 @@
+jetpack-io>=0.5.1-dev20210921
+flask
+fastapi
+flask[async]
+boto3
+uvicorn

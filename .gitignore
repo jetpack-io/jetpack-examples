@@ -1,0 +1,12 @@
+.vim
+.vscode/
+.DS_STORE
+.python-version
+.jetpack.json
+jetpack.project
+flask-hello/__pycache__/
+.venv/
+*.bak
+node_modules/
+test_trainer
+k8s.yml
