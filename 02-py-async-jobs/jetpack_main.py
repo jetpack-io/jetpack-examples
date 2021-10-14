@@ -1,6 +1,7 @@
 import asyncio
 from typing import Dict, List 
 from jetpack import cli
+from starlette.responses import HTMLResponse
 from coin_toss import flip_coin
 from fibonacci import fibonacci
 from error_job import error_thrower
@@ -8,15 +9,6 @@ from fastapi import FastAPI, Response
 
 
 app = FastAPI()
-
-class TestError(Exception):
-    def __init__(self, message):
-        self.message = message
-
-
-@app.get("/")
-async def ready() -> Response:
-    return Response(status_code=200)
 
 
 @app.get("/diamond")
@@ -31,7 +23,7 @@ async def diamond() -> Dict[str, List[str]]:
         )
     else:
         results += await asyncio.gather(
-            flip_coin("B-Tail"),
+            flip_coin("B-Tails"),
             flip_coin("C-Tails")
         )
 
@@ -48,8 +40,20 @@ async def fib(n: int) -> int:
 
 
 @app.get("/error")
-def error():
-    error_thrower()
+def error()-> HTMLResponse:
+    try:
+        error_thrower()
+    except Exception as err:
+        content=f"""
+        <h1> {type(err).__name__} </h1>
+        <p> {err} </p>
+        """
+        return HTMLResponse(content=content, status_code=500)
+
+
+@app.get("/")
+async def ready() -> Response:
+    return Response(status_code=200)
 
 
 cli.handle(app)

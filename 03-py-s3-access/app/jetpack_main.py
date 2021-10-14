@@ -4,6 +4,7 @@ import boto3
 import time
 from datetime import datetime
 from starlette.responses import HTMLResponse, Response
+import uvicorn
 
 app = FastAPI()
 
@@ -37,7 +38,7 @@ async def s3_access_job() -> str:
     s3 = boto3.resource('s3')
     # Read Bucket in Jetpack Account
     bucketA = s3.Bucket("lago-test-bucket")
-    # Read Bucket in Personal Account
+    # Read Bucket in A Personal Account
     bucketB = s3.Bucket("jetpack-test-bucket")
     v_log = open("last_visit.txt", "x")
     v_log.write(str(datetime.now()))
@@ -49,4 +50,5 @@ async def s3_access_job() -> str:
     html_content = open("/tmp/lago-test.html").read()
     return html_content
 
-cli.handle(app)
+
+jetpack.init()
