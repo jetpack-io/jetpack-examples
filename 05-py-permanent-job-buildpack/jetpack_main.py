@@ -8,8 +8,8 @@ from time import sleep
 from typing import Any, Dict
 
 import boto3
-from datasets.arrow_dataset import Dataset
 from dotenv import load_dotenv
+from datasets.arrow_dataset import Dataset
 from jetpack import job
 from transformers.trainer_utils import TrainOutput
 from transformers import (
@@ -20,10 +20,9 @@ from transformers import (
 )
 from redis import StrictRedis, exceptions as rexc
 
+load_dotenv()
 # Turn off buffering for print statement
 print = functools.partial(print, flush=True)
-
-load_dotenv()
 
 TEST_BUCKET = os.environ.get("TEST_BUCKET")
 
@@ -66,6 +65,7 @@ async def train_model(datadict: Dict[str, Any], model_name: str) -> Dict[str, fl
     )
 
     print("==Downloading and configuring model==")
+    # model_bucket.download_folder("")
     download_model()
     model = AutoModelForSequenceClassification.from_pretrained('./model_tmp', num_labels=2)
     training_args = TrainingArguments("test_trainer", eval_accumulation_steps=2)
@@ -111,7 +111,6 @@ async def main():
         except Exception as e:
             result = f"Unexpected error:\n{traceback.format_exc()}"
         print(result)
-        conn.set("trainResults", json.dumps(result))
         sleep(1)
 
 if __name__ == "__main__":

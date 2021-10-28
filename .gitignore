@@ -10,3 +10,5 @@ __pycache__/
 node_modules/
 test_trainer
 k8s.yml
+04-py-permanent-job/app/.env
+05-py-permanent-job-buildpack/.env

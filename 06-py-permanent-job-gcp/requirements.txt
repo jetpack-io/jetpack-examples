@@ -1,0 +1,2 @@
+boto3
+jetpack-io>=0.5.1dev20211018

@@ -11,4 +11,6 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY ./app /app
 EXPOSE 80
 
+ENV REDIS_HOST=redis-master REDIS_PORT=6379
+
 CMD ["python", "jetpack_main.py"]

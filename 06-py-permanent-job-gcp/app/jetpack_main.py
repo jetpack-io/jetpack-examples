@@ -9,8 +9,7 @@ from typing import Any, Dict
 
 import boto3
 from datasets.arrow_dataset import Dataset
-from dotenv import load_dotenv
-from jetpack import job
+from jetpack import job, cron
 from transformers.trainer_utils import TrainOutput
 from transformers import (
     AutoModelForSequenceClassification,
@@ -23,17 +22,14 @@ from redis import StrictRedis, exceptions as rexc
 # Turn off buffering for print statement
 print = functools.partial(print, flush=True)
 
-load_dotenv()
-
-TEST_BUCKET = os.environ.get("TEST_BUCKET")
+TEST_BUCKET = 'lago-test-bucket'
 
 def redis_conn() -> StrictRedis:
     host = os.environ.get("REDIS_HOST")
     port = os.environ.get("REDIS_PORT")
-    password = os.environ.get("REDIS_PASSWORD")
     if host is None or port is None:
         raise ValueError("REDIS_HOST environment variable not set")
-    return StrictRedis(host=host, port=int(port), password=password)
+    return StrictRedis(host=host, port=int(port), password="secretpassword")
 
 
 def download_model() -> bool:
@@ -49,6 +45,7 @@ def upload_model() -> bool:
    bucket.upload_file('./model_tmp/config.json', 'config.json')
    bucket.upload_file('./model_tmp/pytorch_model.bin', 'pytorch_model.bin')
    return True
+
 
 @job
 async def train_model(datadict: Dict[str, Any], model_name: str) -> Dict[str, float]:
@@ -66,6 +63,7 @@ async def train_model(datadict: Dict[str, Any], model_name: str) -> Dict[str, fl
     )
 
     print("==Downloading and configuring model==")
+    # model_bucket.download_folder("")
     download_model()
     model = AutoModelForSequenceClassification.from_pretrained('./model_tmp', num_labels=2)
     training_args = TrainingArguments("test_trainer", eval_accumulation_steps=2)
@@ -79,6 +77,11 @@ async def train_model(datadict: Dict[str, Any], model_name: str) -> Dict[str, fl
     model.save_pretrained('./model_tmp')
     upload_model()
     return result.metrics
+
+
+# @cron.repeat(cron.every().minute)
+# def check_results():
+
 
 
 async def main():
@@ -113,6 +116,7 @@ async def main():
         print(result)
         conn.set("trainResults", json.dumps(result))
         sleep(1)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
