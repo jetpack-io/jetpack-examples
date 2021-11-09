@@ -4,9 +4,11 @@
 .python-version
 .jetpack.json
 jetpack.project
-flask-hello/__pycache__/
 .venv/
 *.bak
+__pycache__/
 node_modules/
 test_trainer
 k8s.yml
+04-py-permanent-job/app/.env
+05-py-permanent-job-buildpack/.env
