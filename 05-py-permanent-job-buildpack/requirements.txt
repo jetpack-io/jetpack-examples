@@ -1,7 +1,0 @@
---find-links https://download.pytorch.org/whl/torch_stable.html
-boto3
-jetpack-io>=0.5.1dev20211018
-transformers
-datasets
-python-dotenv
-torch==1.9.1+cpu 

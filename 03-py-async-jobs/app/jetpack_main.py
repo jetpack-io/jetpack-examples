@@ -1,6 +1,7 @@
 import asyncio
 from typing import Dict, List 
 from jetpack import cli
+from starlette.responses import HTMLResponse
 from coin_toss import flip_coin
 from fibonacci import fibonacci
 from error_job import error_thrower
@@ -49,7 +50,14 @@ async def fib(n: int) -> int:
 
 @app.get("/error")
 def error():
-    error_thrower()
+    try:
+        error_thrower()
+    except Exception as err:
+        content=f"""
+        <h1> {type(err).__name__} </h1>
+        <p> {err} </p>
+        """
+        return HTMLResponse(content=content, status_code=500)
 
 
 cli.handle(app)
