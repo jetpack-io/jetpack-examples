@@ -1,9 +1,9 @@
 import asyncio
-from typing import Tuple
-from jetpack import job
+from typing import Tuple, Any
+from jetpack import function
 
 
-@job
+@function
 async def fibonacci(n: int) -> int:
     if n < 0:
         print("Incorrect input")
@@ -15,5 +15,9 @@ async def fibonacci(n: int) -> int:
     elif n == 1:
         return 1
     else:
-        r: Tuple[int, int] = await asyncio.gather(fibonacci(n - 1), fibonacci(n - 2))
+        jobs = [
+            fibonacci.launch(n-1),
+            fibonacci.launch(n-2)
+        ]
+        r: Tuple[Any] = await asyncio.gather(*jobs)
         return r[0] + r[1]

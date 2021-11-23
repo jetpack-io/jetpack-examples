@@ -23,27 +23,29 @@ async def ready() -> Response:
 @app.get("/diamond")
 async def diamond() -> Dict[str, List[str]]:
     results: List[str] = []
-    results += [await flip_coin("A")]
+    results += [await flip_coin.launch("A")]
 
     if results[0] == "heads":
-        results += await asyncio.gather(
-            flip_coin("B-Head"),
-            flip_coin("C-Head")
-        )
+        jobs = [
+            flip_coin.launch("B-Head"),
+            flip_coin.launch("C-Head")
+        ]
     else:
-        results += await asyncio.gather(
-            flip_coin("B-Tail"),
-            flip_coin("C-Tails")
-        )
+        jobs = [
+            flip_coin.launch("B-Tails"),
+            flip_coin.launch("C-Tails")
+        ]
+    
+    results += await asyncio.gather(*jobs)
 
-    results += [await flip_coin("D")]
+    results += [await flip_coin.launch("D")]
 
     return {"results": results}
 
 
 @app.get("/fibonacci/{n}")
 async def fib(n: int) -> int:
-    result: int = await fibonacci(n)
+    result = await fibonacci.launch(n)
     print(result)
     return result
 
@@ -51,7 +53,7 @@ async def fib(n: int) -> int:
 @app.get("/error")
 def error():
     try:
-        error_thrower()
+        error_thrower.launch().get()
     except Exception as err:
         content=f"""
         <h1> {type(err).__name__} </h1>

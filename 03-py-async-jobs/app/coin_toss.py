@@ -1,6 +1,6 @@
 import random
 import time
-from jetpack import job
+from jetpack import function
 
 # Diamond Example:#
 
@@ -13,7 +13,7 @@ from jetpack import job
 ################
 
 
-@job
+@function
 async def flip_coin(label: str) -> str:
     flip = "heads" if random.randint(0, 1) == 0 else "tails"
     time.sleep(1)
