@@ -5,6 +5,7 @@ from jetpack import function
 
 @function
 async def fibonacci(n: int) -> int:
+    print("Fibonacci called!")
     if n < 0:
         print("Incorrect input")
         raise ValueError
@@ -15,7 +16,6 @@ async def fibonacci(n: int) -> int:
     elif n == 1:
         return 1
     else:
-        
         r: Tuple[int, int] = await asyncio.gather(
             fibonacci(n - 1), 
             fibonacci(n - 2)

@@ -1,6 +1,5 @@
 import asyncio
-from typing import Dict, List 
-from jetpack import cli
+from typing import Dict, List
 from starlette.responses import HTMLResponse
 from coin_toss import flip_coin
 from fibonacci import fibonacci
@@ -19,47 +18,53 @@ class TestError(Exception):
 async def ready() -> Response:
     return Response(status_code=200)
 
+# Diamond Example:#
+
+###################
+#      A
+#    /  \
+#  B     C
+#   \   /
+#     D
+################
 
 @app.get("/diamond")
 async def diamond() -> Dict[str, List[str]]:
     results: List[str] = []
-    results += [await flip_coin.launch("A")]
+    results += [await flip_coin("A")]
 
     if results[0] == "heads":
         jobs = [
-            flip_coin.launch("B-Head"),
-            flip_coin.launch("C-Head")
+            flip_coin("B-Head"),
+            flip_coin("C-Head")
         ]
     else:
         jobs = [
-            flip_coin.launch("B-Tails"),
-            flip_coin.launch("C-Tails")
+            flip_coin("B-Tails"),
+            flip_coin("C-Tails")
         ]
     
     results += await asyncio.gather(*jobs)
 
-    results += [await flip_coin.launch("D")]
+    results += [await flip_coin("D")]
 
     return {"results": results}
 
 
 @app.get("/fibonacci/{n}")
 async def fib(n: int) -> int:
-    result = await fibonacci.launch(n)
+    result = await fibonacci(n)
     print(result)
     return result
 
 
 @app.get("/error")
-def error():
+async def error():
     try:
-        error_thrower.launch().get()
+        await error_thrower()
     except Exception as err:
         content=f"""
         <h1> {type(err).__name__} </h1>
         <p> {err} </p>
         """
         return HTMLResponse(content=content, status_code=500)
-
-
-cli.handle(app)

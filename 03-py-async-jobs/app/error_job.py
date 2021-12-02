@@ -6,5 +6,5 @@ class TestError(Exception):
 
 
 @function
-def error_thrower():
+async def error_thrower():
     raise TestError("This is a passed error")

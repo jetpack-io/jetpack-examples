@@ -1,0 +1,4 @@
+fastapi
+jetpack-io>=0.5.1.dev202111301638297739
+uvicorn
+requests
