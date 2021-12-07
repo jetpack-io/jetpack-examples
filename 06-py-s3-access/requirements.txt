@@ -1,4 +1,0 @@
-fastapi
-uvicorn
-jetpack-io>=0.5.1.dev20211010
-boto3
