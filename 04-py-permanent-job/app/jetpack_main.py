@@ -10,7 +10,7 @@ from typing import Any, Dict
 import boto3
 from datasets.arrow_dataset import Dataset
 from dotenv import load_dotenv
-from jetpack import job
+from jetpack import function
 from transformers.trainer_utils import TrainOutput
 from transformers import (
     AutoModelForSequenceClassification,
@@ -50,7 +50,7 @@ def upload_model() -> bool:
    bucket.upload_file('./model_tmp/pytorch_model.bin', 'pytorch_model.bin')
    return True
 
-@job
+@function
 async def train_model(datadict: Dict[str, Any], model_name: str) -> Dict[str, float]:
     r = redis_conn()
     data = Dataset.from_dict(datadict)

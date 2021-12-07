@@ -5,7 +5,7 @@ import json
 
 
 @cron.repeat(cron.every().minute)
-def btc_cron_job():
+async def btc_cron_job():
     r = requests.get("https://api.coindesk.com/v1/bpi/currentprice.json").text
     data = json.loads(r)
     print("Getting BTC Price")

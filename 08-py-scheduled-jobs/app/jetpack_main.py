@@ -21,16 +21,11 @@ async def ready() -> Response:
 
 @app.post("/delay")
 async def delay(delayed_message: DelayModel) -> Dict[str, Union[str,int]]:
-    task = await jetpack.schedule(slack_message(delayed_message.message),
+    task = await jetpack.schedule(print_message(delayed_message.message),
                            delta=delayed_message.delay)
     return {"message": delayed_message.message,
             "delay": delayed_message.delay}
 
 @function
-async def slack_message(message: str) -> Dict[str,str]:
-    url = "https://hooks.slack.com/services/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"
-    payload = json.dumps({"text": message})
-    headers = {"content-type": "application/json", "Accept-Charset": "UTF-8"}
-    if url: 
-        requests.post(url,data=payload,headers=headers)
-    return {"delayedMessage": message}
+async def print_message(message: str) -> None:
+    print(json.dumps({"delayedMessage": message}))
