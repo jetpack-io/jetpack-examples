@@ -1,0 +1,5 @@
+python-dotenv
+fastapi
+jetpack-io>=0.5.1.dev202112011638382467
+requests
+uvicorn

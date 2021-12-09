@@ -12,5 +12,4 @@ test_trainer
 k8s.yml
 04-py-permanent-job/app/.env
 05-py-permanent-job-buildpack/.env
-06-is-it-down-monitor/.env
 06-is-it-down-monitor/app/.env
