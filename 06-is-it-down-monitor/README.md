@@ -23,6 +23,14 @@ Set this in `app/.env` as:
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
+## Testing
+
+After running `jetpack dev`, you can test the monitor by running:
+
+```bash
+curl localhost:8080/poll_down_status
+```
+
 ## Debugging
 - Ensure the `jetpack-io` version in `requirements.txt` is the latest.
 - There is a FastAPI endpoint which can trigger the cronjob functionality on-demand.
