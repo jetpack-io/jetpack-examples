@@ -31,6 +31,12 @@ After running `jetpack dev`, you can test the monitor by running:
 curl localhost:8080/poll_down_status
 ```
 
+To view the list of pods that were created, run:
+```bash
+kubectl get pods -l app.kubernetes.io/instance=is-it-down-monitor
+```
+
+
 ## Debugging
 - Ensure the `jetpack-io` version in `requirements.txt` is the latest.
 - There is a FastAPI endpoint which can trigger the cronjob functionality on-demand.
