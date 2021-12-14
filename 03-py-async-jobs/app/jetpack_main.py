@@ -27,7 +27,7 @@ async def ready() -> Response:
 #   \   /
 #     D
 ################
-
+# localhost:8080/diamond
 @app.get("/diamond")
 async def diamond() -> Dict[str, List[str]]:
     results: List[str] = []

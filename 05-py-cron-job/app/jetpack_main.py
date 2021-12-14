@@ -1,10 +1,11 @@
 # type: ignore
-from jetpack import cron
+import time
+from jetpack import cron, function
 import requests
 import json
 
 
-@cron.repeat(cron.every().minute)
+@cron.repeat(cron.every(10).minutes)
 async def btc_cron_job():
     r = requests.get("https://api.coindesk.com/v1/bpi/currentprice.json").text
     data = json.loads(r)

@@ -11,3 +11,11 @@ This repo contains example services and functions for running with Jetpack.
 ## Deploying Examples:
 
 If you have the Jetpack CLI and access to a Kubernetes Cluster, you can deploy and test the examples using `jetpack dev`.
+
+## Documentation
+
+For more documentation on Jetpack, you can visit: https://jetpack.gitbook.io/jetpack-docs/ 
+
+
+
+

@@ -2,7 +2,7 @@ import asyncio
 from typing import Tuple
 from jetpack import function
 
-
+# Note: Please do not run with n > 6!!
 @function
 async def fibonacci(n: int) -> int:
     print("Fibonacci called!")

@@ -20,11 +20,12 @@ async def ready() -> Response:
 
 
 @app.post("/delay")
-async def delay(delayed_message: DelayModel) -> Dict[str, Union[str,int]]:
+async def delay(delayed_message: DelayModel) -> Dict[str, Union[str, int]]:
     task = await jetpack.schedule(print_message(delayed_message.message),
-                           delta=delayed_message.delay)
-    return {"message": delayed_message.message,
+                                  delta=delayed_message.delay)
+    return {"result": "Message scheduled successfully",
             "delay": delayed_message.delay}
+
 
 @function
 async def print_message(message: str) -> None:

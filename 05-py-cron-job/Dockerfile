@@ -6,8 +6,8 @@ COPY requirements.txt /app/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-COPY ./app /app
 EXPOSE 8080
+COPY ./app /app
 
 # Temporary limitation -- need the main container to persist while the cron job runs
-CMD ["/bin/bash", "-c", "--", "while true; do sleep 30; done;"]
+CMD ["/bin/bash", "-c", "--", "while true; do sleep 90; done;"]
