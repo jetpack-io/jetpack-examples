@@ -48,7 +48,7 @@ async def check_if_down(website: str):
     # The following line is useful for debugging
     # return (website, True if random.randint(0, 1) == 1 else False)
 
-    return (website, r.status_code == requests.codes.ok)
+    return (website, r.status_code != requests.codes.ok)
 
 @function
 async def notify_slack(website):
