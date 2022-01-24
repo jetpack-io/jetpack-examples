@@ -1,10 +1,10 @@
-from jetpack import function
+from jetpack import jetroutine
 
 class TestError(Exception):
     def __init__(self, message):
         self.message = message
 
 
-@function
+@jetroutine
 async def error_thrower():
     raise TestError("This is a passed error")

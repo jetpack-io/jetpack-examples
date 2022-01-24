@@ -1,13 +1,17 @@
+import os
 import requests
 from typing import Dict, Union
 import jetpack
 import json
-from jetpack import function
+from dotenv import load_dotenv
+from jetpack import jetroutine
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
 
+load_dotenv()
 app = FastAPI()
-
+SLACK_URL = os.environ.get("SLACK_URL")
+assert SLACK_URL is not None
 
 class DelayModel(BaseModel):
     delay: int
@@ -27,6 +31,11 @@ async def delay(delayed_message: DelayModel) -> Dict[str, Union[str, int]]:
             "delay": delayed_message.delay}
 
 
-@function
+@jetroutine
 async def print_message(message: str) -> None:
-    print(json.dumps({"delayedMessage": message}))
+    url = SLACK_URL
+    payload = json.dumps({"text": message})
+    headers = {"content-type": "application/json", "Accept-Charset": "UTF-8"}
+    if url: 
+        requests.post(url,data=payload,headers=headers)
+    print({"delayedMessage": message})

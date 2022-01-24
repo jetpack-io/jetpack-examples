@@ -3,8 +3,8 @@ import random
 import requests
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Response
-from jetpack import function, cron
+from fastapi import FastAPI
+from jetpack import jetroutine, cron
 from os import environ
 
 load_dotenv()
@@ -16,7 +16,7 @@ async def schedule_poll():
   print("running cronjob schedule_poll")
   await poll_down_status_impl()
 
-@function
+@jetroutine
 async def poll_down_status_impl():
   print("starting poll_down_status")
 
@@ -41,7 +41,7 @@ async def poll_down_status_impl():
   await asyncio.gather(*notifications)
   return "done"
 
-@function
+@jetroutine
 async def check_if_down(website: str):
     r = requests.get(website)
     
@@ -50,7 +50,7 @@ async def check_if_down(website: str):
 
     return (website, r.status_code != requests.codes.ok)
 
-@function
+@jetroutine
 async def notify_slack(website):
     webhook_env_var_name = "SLACK_WEBHOOK_URL"
     url = environ.get(webhook_env_var_name)

@@ -1,6 +1,6 @@
 # type: ignore
 import time
-from jetpack import cron, function
+from jetpack import cron 
 import requests
 import json
 

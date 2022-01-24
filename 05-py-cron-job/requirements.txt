@@ -1,2 +1,2 @@
 requests
-jetpack-io>=0.5.1.dev202112101639156512
+jetpack-io>=0.5.1.dev202201241643053138
