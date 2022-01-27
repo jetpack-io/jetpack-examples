@@ -1,3 +1,3 @@
 fastapi
-jetpack-io>=0.5.1.dev202201241643053138
+jetpack-io>=0.5.1.dev202201261643227896
 uvicorn

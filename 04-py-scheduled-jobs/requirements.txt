@@ -1,5 +1,5 @@
+jetpack-io>=0.5.1.dev202201261643227896
 fastapi
-jetpack-io>=0.5.1.dev202201241643053138
 uvicorn
 python-dotenv
 requests

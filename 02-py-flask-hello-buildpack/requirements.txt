@@ -1,3 +1,0 @@
-jetpack-io>=0.5.1.dev202201241643053138
-python-dotenv
-flask

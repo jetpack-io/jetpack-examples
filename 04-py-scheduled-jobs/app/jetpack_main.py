@@ -13,6 +13,7 @@ app = FastAPI()
 SLACK_URL = os.environ.get("SLACK_URL")
 assert SLACK_URL is not None
 
+
 class DelayModel(BaseModel):
     delay: int
     message: str
@@ -35,7 +36,9 @@ async def delay(delayed_message: DelayModel) -> Dict[str, Union[str, int]]:
 async def print_message(message: str) -> None:
     url = SLACK_URL
     payload = json.dumps({"text": message})
-    headers = {"content-type": "application/json", "Accept-Charset": "UTF-8"}
-    if url: 
-        requests.post(url,data=payload,headers=headers)
+    headers = {"content-type": "application/json",
+               "Accept-Charset": "UTF-8"}
+    if url:
+        r = requests.post(url, data=payload, headers=headers)
+        print(r.status_code)
     print({"delayedMessage": message})
