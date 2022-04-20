@@ -16,16 +16,27 @@ class TestError(Exception):
 
 @app.get("/")
 async def ready() -> Response:
-    return Response(status_code=200)
+    content=f"""
+    <h1>Jetroutine examples</h1>
+    <p>/diamond</p>
+    <p>/fibonacci/{n} e.g. /fibonacci/4</p>
+    <p>/error</p>
+    """
+    return HTMLResponse(content=content, status_code=200)
 
-# Diamond Example:#
-
+# Diamond Example:
+# run multiple jobs in parallel
+#
 ###################
-#      A
-#    /  \
+#   start
+#     |
+#     A
+#   /   \
 #  B     C
 #   \   /
 #     D
+#     |
+#    end
 ################
 # localhost:8080/diamond
 @app.get("/diamond")

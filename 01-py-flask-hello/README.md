@@ -14,4 +14,3 @@ curl localhost:8080/
 # <h1>Hello! You are currently in development</h1>
 
 ```
-

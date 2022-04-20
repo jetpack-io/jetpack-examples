@@ -2,14 +2,19 @@ import random
 import time
 from jetpack import jetroutine
 
-# Diamond Example:#
-
+# Diamond Example:
+# run multiple jobs in parallel
+#
 ###################
-#      A
-#    /  \
+#   start
+#     |
+#     A
+#   /   \
 #  B     C
 #   \   /
 #     D
+#     |
+#    end
 ################
 
 

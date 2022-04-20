@@ -7,9 +7,7 @@ This example deploys a container which launches a CronJob. The CronJob in this e
 `jetpack up` to deploy the image + CronJob to your namespace 
 
 ## How to Test
-You can see the Jobs running in your environment using 
-
-Once the task runs, you can see the message by running: 
+The job won't run for **10** minutes. In 10 minutes, you can see the results by running:
 ```bash
 kubectl logs <name-of-the-job-pod>
 ```
