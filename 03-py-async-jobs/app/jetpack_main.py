@@ -19,7 +19,7 @@ async def ready() -> Response:
     content=f"""
     <h1>Jetroutine examples</h1>
     <p>/diamond</p>
-    <p>/fibonacci/{n} e.g. /fibonacci/4</p>
+    <p>/fibonacci/{{n}} e.g. /fibonacci/4</p>
     <p>/error</p>
     """
     return HTMLResponse(content=content, status_code=200)
