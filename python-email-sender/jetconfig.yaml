@@ -1,0 +1,5 @@
+application:
+  name: python-email-sender
+flags:
+  min-replicas: 1
+  public: true
