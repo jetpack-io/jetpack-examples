@@ -1,0 +1,79 @@
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+.content {
+  padding: 20px;
+  text-align: center;
+  font-family: 'Manrope', sans-serif;
+  width: min(600px, 100vw - 40px);
+  margin: 0 auto;
+}
+
+:root {
+  --purple: rgb(104, 79, 156);
+}
+
+
+.logo {
+  width: clamp(30vw, 300px, 80vw);
+}
+
+h1 {
+  font-size: clamp(1rem, 2.5vw, 2.5rem);
+}
+h1 {
+  font-size: clamp(1rem, 2.5vw, 2rem);
+}
+
+label {
+  display: block;
+  text-align: left;
+}
+.email-group {
+  display: flex;
+}
+#email {
+  display: block;
+  width: 100%;
+}
+.send-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .5em;
+}
+.send {
+  font-size: 15pt;
+  border-radius: 3px;
+  padding: 4px 8px;
+  border-color: var(--purple);
+  background-color: var(--purple);
+  color: white;
+}
+.send:disabled {
+  background-color: grey;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th {
+  font-weight: bold;
+  border-bottom: 1px solid var(--purple);
+}
+.table th, .table td {
+  padding: .5em;
+  border-bottom: 1px solid #8a8a8a;
+}
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+.right {
+  text-align: right;
+}

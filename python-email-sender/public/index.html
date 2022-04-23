@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Jetpack Email Sender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- TODO: change these into bit.ly links to mask the UTM codes -->
+  <link rel="icon" href="https://jetpack.io/favicon.ico?utm=sample" sizes="any">
+  <link rel="icon" href="https://site-assets.plasmic.app/2ebd4c0af8d24344d1df7ba3afee6b55.svg?utm=sample" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="https://jetpack.io/favicon.png?utm=sample">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="content">
+    <img class="logo" alt="Jetpack" loading="lazy" src="https://site-assets.plasmic.app/2ebd4c0af8d24344d1df7ba3afee6b55.svg?utm=sample" />
+    <h1>Jetpack Email Sender</h1>
+
+    <p>This sample demonstrates how Jetpack can fan out background requests to parallel Kubernetes jobs.</p>
+
+    <form id="form">
+      <div>
+        <label for="email">Enter a bunch of emails, one on each line</label>
+      </div>
+      <div class="email-group">
+        <textarea id="email" name="email" rows="10">
+me@jetpack.io
+example@jetpack.io
+</textarea>
+      </div>
+      <div class="send-group">
+        <button type="submit" class="send">Simulate Send in Parallel</button>
+      </div>
+    </form>
+
+    <h2>Results</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Success</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody id="results">
+      </tbody>
+    </table>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.6/purify.min.js" integrity="sha512-DJjvM/U3zCRpzrYboJgg23iLHapWcS2rlo7Ni18Cdv+FMs6b3gUF7hQihztj4uVkHHfUwk7dha97jVzRqUJ7hg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/app.js"></script>
+
+</body>
+</html>
