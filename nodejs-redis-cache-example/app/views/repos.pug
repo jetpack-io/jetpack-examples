@@ -1,0 +1,19 @@
+doctype html 
+html
+    head
+        title 
+    body
+        h1 Repo Search
+        br
+        
+        h2 Query
+        p #{query}
+
+        h2 Total Search Results
+        p #{totalCount}
+        
+        h2 Top Results: 
+        ul
+        each repo in topRepos
+            li
+                a(href=repo.url) #{repo.name}
