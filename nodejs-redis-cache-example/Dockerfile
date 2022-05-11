@@ -9,7 +9,7 @@ RUN npm install
 COPY ./app .
 
 ENV PATH /app/node_modules/.bin:$PATH
-ENV JETPACK_ENTRYPOINT /app/app.js
+ENV JETPACK_ENTRYPOINT /app/cron.js
 
 EXPOSE 8080
 

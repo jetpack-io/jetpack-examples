@@ -3,7 +3,6 @@
 import express from 'express';
 import { createClient } from '@node-redis/client';
 import axios from 'axios';
-import './cron.js';
 
 const app = express()
 const port = 8080
