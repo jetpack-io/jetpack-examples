@@ -2,15 +2,16 @@
     "name": "jetpack_web_app",
     "version": "1.0.0",
     "description": "Node.js on Docker",
-    "main": "app.js",
+    "main": "src/app.js",
     "type": "module",
     "scripts": {
-        "start": "node app.js"
+        "start": "node src/app.js"
     },
     "dependencies": {
-        "express": "^4.17.3",
-        "redis": "^4.0.6",
         "axios": "^0.26.1",
-        "pug": "^3.0.2"
+        "express": "^4.17.3",
+        "jetpack-io": "^0.1.0-alpha.1",
+        "pug": "^3.0.2",
+        "redis": "^4.0.6"
     }
 }
