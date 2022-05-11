@@ -2,10 +2,10 @@
     "name": "jetpack_web_app",
     "version": "1.0.0",
     "description": "Node.js on Docker",
-    "main": "app.js",
+    "main": "src/app.js",
     "type": "module",
     "scripts": {
-        "start": "node app.js"
+        "start": "node src/app.js"
     },
     "dependencies": {
         "axios": "^0.26.1",

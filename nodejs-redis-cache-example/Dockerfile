@@ -1,16 +1,16 @@
-FROM amd64/node:17-slim
+FROM amd64/node:alpine
 
 WORKDIR /app
 
-COPY app/package*.json ./
+COPY package*.json ./
 
 RUN npm install
 
-COPY ./app .
+COPY ./src ./src
 
 ENV PATH /app/node_modules/.bin:$PATH
-ENV JETPACK_ENTRYPOINT /app/cron.js
+ENV JETPACK_ENTRYPOINT /app/src/cron.js
 
 EXPOSE 8080
 
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
