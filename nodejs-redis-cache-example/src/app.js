@@ -59,10 +59,7 @@ router.get('/cache', async (req, res) => {
       return { err: { message: err.message } };
     }
   }));
-  const results = {};
-  for (let i = 0; i < keys.length; i++) {
-    results[keys[i]] = values[i]; // TODO: JSON.parse? value may not be JSON.
-  }
+  const results = keys.reduce((k, result, i) => ({ ...result, k: values[i], }), {});
   return res.json(results);
 });
 
@@ -80,8 +77,8 @@ router.get('/repos', async (req, res) => {
     });
   } else {
     // get new results and cache
-    const results = await axios.get(`https://api.github.com/search/repositories?q=${searchTerm}`);
-    const parsed = parseSearchResults(results.data, searchTerm)
+    const githubRes = await axios.get(`https://api.github.com/search/repositories?q=${searchTerm}`);
+    const parsed = parseSearchResults(githubRes.data, searchTerm)
     await redisClient.set(searchTerm, JSON.stringify(parsed), 'EX', 600); // expire in 60 seconds
     return res.status(200).send({
       message: 'cache miss',
