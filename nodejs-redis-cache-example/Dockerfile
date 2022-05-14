@@ -1,4 +1,6 @@
 FROM node:alpine
+# On Mac M1? use:
+# FROM amd64/node:alpine
 
 WORKDIR /app
 

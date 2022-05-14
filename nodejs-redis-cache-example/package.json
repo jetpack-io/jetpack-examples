@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/app.js",
-    "jetpack:register": "node src/cron.js"
+    "jetpack:register": "jetpack-sdk register --entrypoint=${WORKDIR}/src/cron.js"
   },
   "dependencies": {
     "axios": "^0.27.2",
