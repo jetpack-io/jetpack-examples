@@ -1,15 +1,19 @@
-FROM amd64/node:alpine
+FROM node:alpine
+# On Mac M1? use:
+# FROM amd64/node:alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json .
 
 RUN npm install
 
-COPY ./src ./src
+COPY . .
 
+# Get `jetpack-sdk` in $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 ENV JETPACK_ENTRYPOINT /app/src/cron.js
+ENV NODE_ENV Production
 
 EXPOSE 8080
 
