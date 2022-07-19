@@ -1,0 +1,7 @@
+application:
+  name: cartoonify
+kubernetes:
+  context: jetpack-trial-context
+  createnamespace: false
+image:
+  repository: 984256416385.dkr.ecr.us-east-2.amazonaws.com/trial-user-repos/jetpack-io
